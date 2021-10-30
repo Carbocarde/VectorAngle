@@ -1,4 +1,4 @@
-##About This Project
+## About This Project
 This project aims to discover/document the different ways to calculate the angle between two vectors.
 
 ## Current Methods
@@ -23,7 +23,7 @@ This project aims to discover/document the different ways to calculate the angle
 - [ ] Change of Basis Implementation
 - [ ] Dot Product Binary Search Implementation
 
-##File Structure
+## File Structure
  - Angle.py
     - Contains the implementation for the general-solvers
  - SpecialCases.py
@@ -38,7 +38,7 @@ This project aims to discover/document the different ways to calculate the angle
  - Util.py
     - Contains utility functions like generating vectors or normalizing a vector.
 
-##Running this project:
+## Running this project:
 `pip install -r requirements.txt`
 
 `pytest TestAngle.py`
