@@ -4,7 +4,7 @@ import Angle
 import SpecialCases
 from Util import random_vector, random_vector_array
 
-VECTOR_COUNT = 100000
+VECTOR_COUNT = 1000000
 NORMALIZE = (False, False)  # Normalize first and/or second vector
 
 test_functions = [Angle.dot_product_norm, Angle.dot_product_mag, Angle.projection]
