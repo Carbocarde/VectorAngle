@@ -1,6 +1,7 @@
 from numba import njit
 import numpy as np
 
+import SpecialCases
 from Util import normalize
 
 
@@ -80,3 +81,30 @@ def projection(v1: np.array, v2: np.array) -> float:
         deg = 180 - deg
 
     return deg
+
+@njit
+def dot_bin_search(v1: np.array, v2: np.array, accuracy=0.000001):
+    """
+    Using binary search, compare the current angle guess with the actual and refine the guess.
+
+    Basic method that just shows that we can generate the angle by seeing if the guess is in front of/behind the actual.
+
+    :param v1: Vector 1
+    :param v2: Vector 2
+    :param accuracy: The accuracy needed for the output (higher number means faster)
+    :return: The angle between two vectors, with up to accuracy size error
+    """
+    angle = 90
+    delta = 45
+
+    dot_angle = dot_product_mag(v1, v2)
+
+    while delta > accuracy:
+        if dot_angle > angle:
+            angle += delta
+        else:
+            angle -= delta
+
+        delta /= 2
+
+    return angle
