@@ -1,7 +1,6 @@
 from numba import njit
 import numpy as np
 
-import SpecialCases
 from Util import normalize
 
 
@@ -82,8 +81,9 @@ def projection(v1: np.array, v2: np.array) -> float:
 
     return deg
 
+
 @njit
-def dot_bin_search(v1: np.array, v2: np.array, accuracy=0.000001):
+def dot_bin_search(v1: np.array, v2: np.array, accuracy=0.000001) -> float:
     """
     Using binary search, compare the current angle guess with the actual and refine the guess.
 
@@ -104,6 +104,84 @@ def dot_bin_search(v1: np.array, v2: np.array, accuracy=0.000001):
             angle += delta
         else:
             angle -= delta
+
+        delta /= 2
+
+    return angle
+
+
+@njit
+def proj_bin_search(v1: np.array, v2: np.array, accuracy=0.000001) -> float:
+    """
+    Calculate the angle two vectors form, using projection and binary search.
+
+    This method uses projection to generate a vector perpendicular to v2, if the angle is equal to the guess.
+
+    1. project v2 onto v1
+                ____
+       v2(proj)|  / v2
+               | /
+               |/
+    2. Scale (v2 - proj) vector according to the angle guess to form 90 deg threshold
+        - The goal is to create a 90 degree angle between v2 & v3 iff v2 & v1 already form the exact given angle
+
+        v3_____|____v2
+          \    |  /
+            \  | /
+              \|/
+
+    3. Update Guess using v1 dot v3
+    4. Repeat steps 2 and 3 until the accuracy is within the specified bounds.
+
+    :param v1: Vector 1
+    :param v2: Vector 2
+    :param accuracy: Max difference from the actual vector angle and the reported
+    :return: The angle formed by the two vectors
+    """
+    # 1
+    dot = np.dot(v1, v2)
+    div = np.dot(v1, v1)
+    scalar = dot / div
+    proj = scalar * v1
+
+    diff = proj - v2
+
+    angle = 90
+    delta = 45
+
+    # Initialize angle beyond initial 90 degree guess
+    if dot < 0:
+        angle += delta
+    else:
+        angle -= delta
+
+    delta /= 2
+
+    while delta > accuracy:
+        # Convert angles >90 to be less than 90 for the sake of calculations
+        gt = False
+        ratio_angle = angle
+        if angle > 90:
+            gt = True
+            ratio_angle = 180 - ratio_angle
+
+        # Scale diff according to angle
+        # Ratio between the diff vector and residual vector
+        #  - Note: v3 = diff + residual
+        # tan(theta) / tan(pi/2 - theta)
+        ratio = np.power(np.tan(np.deg2rad(ratio_angle)), 2)
+        residual = diff / ratio
+        v3 = proj + residual
+
+        dot = np.dot(v2, v3)
+
+        if gt:
+            dot = -dot
+
+        if dot > 0:
+            angle -= delta
+        else:
+            angle += delta
 
         delta /= 2
 

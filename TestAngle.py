@@ -12,12 +12,19 @@ import SpecialCases
 from Util import random_vector_pair, random_vector_array
 
 truth_function = Angle.dot_product_norm
-test_functions = [Angle.dot_product_norm, Angle.dot_product_mag, Angle.projection, Angle.dot_bin_search]
+test_functions = [Angle.dot_product_norm, Angle.dot_product_mag, Angle.projection, Angle.dot_bin_search, Angle.proj_bin_search]
 
 
 @pytest.fixture(params=test_functions)
 def function(request):
     return request.param
+
+
+def test_compile(function):
+    v1 = np.array([1, 1], dtype="float64")
+    v2 = np.array([1, 1], dtype="float64")
+
+    function(v1, v2)
 
 
 test_2d_vectors = [

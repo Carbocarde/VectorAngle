@@ -38,9 +38,9 @@ Vector Dimension|Dot Product - Norm|Dot Product - Mag|Projection
   - [X] Util
 - [X] Projection Method Writeup
 - [X] Dot Product Binary Search Implementation
+- [X] Projection Binary Search Implementation
 - [ ] Publish Repo
 - [ ] Change of Basis Implementation
-- [ ] Projection Binary Search Implementation
 
 ## File Structure
  - Angle.py
