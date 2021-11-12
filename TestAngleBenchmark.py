@@ -7,6 +7,7 @@ from Util import random_vector, random_vector_array
 VECTOR_COUNT = 1000000
 NORMALIZE = (False, False)  # Normalize first and/or second vector
 
+# Don't benchmark dot_bin_search, proj_bin_search by default as it runs much slower than all other methods
 test_functions = [Angle.dot_product_norm, Angle.dot_product_mag, Angle.projection]
 
 if NORMALIZE == (True, True):
