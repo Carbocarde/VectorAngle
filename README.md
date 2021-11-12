@@ -1,10 +1,13 @@
 ## About This Project
+Dot products encode a lot of information - one of which is the angle between two vectors. 
 This project aims to discover/document the different ways to calculate the angle between two vectors.
 
 ## Current Methods
 1. Dot Product (norm)
 2. Dot Product (mag)
 3. Projection
+4. Dot Product Bin Search (mag)
+5. Projection Bin Search
 
 ## Current Numbers
 Runtime for each method to calculate the angle between 1,000,000 randomly generated vectors on an Intel® Core™ i7-8550U CPU
@@ -26,7 +29,6 @@ Vector Dimension|Dot Product - Norm|Dot Product - Mag|Projection|Dot Product - B
 
 ## Future Methods
 1. Change of Basis
-2. Dot Product Binary Search
 
 ## TODO
 - [X] Dot Product Norm Implementation
