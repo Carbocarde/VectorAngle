@@ -5,3 +5,5 @@ __pycache__
 C++/.main.cpp.swp
 C++/a.exe
 C++/a.out
+.vscode
+.*
