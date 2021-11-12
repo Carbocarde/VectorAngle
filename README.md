@@ -1,5 +1,5 @@
 ## About This Project
-Dot products encode a lot of information - one of which is the angle between two vectors. 
+Dot products encode a lot of information - one of which is the angle between two vectors.
 This project aims to discover/document the different ways to calculate the angle between two vectors.
 
 ## Current Methods
@@ -42,6 +42,7 @@ Vector Dimension|Dot Product - Norm|Dot Product - Mag|Projection|Dot Product - B
 - [X] Dot Product Binary Search Implementation
 - [X] Projection Binary Search Implementation
 - [X] Publish Repo
+- [X] Rewrite in C++
 - [ ] Change of Basis Implementation
 
 ## File Structure
@@ -64,4 +65,4 @@ Vector Dimension|Dot Product - Norm|Dot Product - Mag|Projection|Dot Product - B
 
 `pytest TestAngle.py`
 
-`pytest TestAngleBenchmark.py`
+`pytest --durations=0 TestAngleBenchmark.py`
