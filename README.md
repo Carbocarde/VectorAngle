@@ -41,7 +41,7 @@ Vector Dimension|Dot Product - Norm|Dot Product - Mag|Projection|Dot Product - B
 - [X] Projection Method Writeup
 - [X] Dot Product Binary Search Implementation
 - [X] Projection Binary Search Implementation
-- [ ] Publish Repo
+- [X] Publish Repo
 - [ ] Change of Basis Implementation
 
 ## File Structure
