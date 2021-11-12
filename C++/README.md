@@ -12,6 +12,10 @@
 # Plotting the output
 The program outputs all the results from the tests in a CSV File, where the first column is always only the name of the function that was called.
 
+# Current Numbers
+See timings.csv for the raw data. Ran on an Intel® Core™ i7-8550U CPU.
+![timings plot](timingsplot.svg)
+
 
 # What does the program do?
 
@@ -30,4 +34,3 @@ The function `testDimensionsFromTo` takes in
 copy and past the two lines beginning with "std::cout" and "testDimensions" and replace the the function (the first argument in the called function) and the string in "STRINGYFY(x)".
 
 Save ... Compile ... Execute
-
