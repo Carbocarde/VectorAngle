@@ -25,7 +25,7 @@ Vector Dimension|Dot Product - Norm|Dot Product - Mag|Projection|Dot Product - B
 40|7.343|0.871|1.335|1:21|1:32
 50|5.553|1.026|1.360|1:22|1:31
 100|1.992|0.757|1.420|1:27|1:43
-1,000||||5:02|8:45
+1,000|1.283|0.560|0.826|5:02|8:45
 
 ## Future Methods
 1. Change of Basis
