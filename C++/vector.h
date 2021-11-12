@@ -15,7 +15,7 @@ struct f_vector{
 
 f_vector generateRandomVector(size_t dim){
 	f_vector v = {new float[dim], dim};
-	srand(time(NULL));		
+
 	for(int i = 0; i < v.dimensions; i++){
 		int j = rand();
 		v.e[i] = *((float*)&j);

@@ -1,6 +1,7 @@
 #include <iostream>
 #include "vector.h"
 #include <chrono>
+#include <stdlib.h>
 
 using std::chrono::high_resolution_clock;
 using std::chrono::duration_cast;
@@ -8,6 +9,7 @@ using std::chrono::duration;
 using std::chrono::milliseconds;
 
 int main(){
+	srand(time(NULL));		
 	constexpr size_t iterations = 200000;
 	auto t0 = high_resolution_clock::now();
 	std::cout <<  "Dimensions, Total Time, Average Time" << std::endl;
@@ -22,8 +24,8 @@ int main(){
 			auto t2 = high_resolution_clock::now();
 			duration<double, std::milli> dur = t2 - t1;
 			average += dur.count();
-			delete v1.e;
-			delete v2.e;
+			//delete v1.e;
+			//delete v2.e;
 		}
 		////average /= iterations;
 		std::cout << i << "," << average << "," << average/iterations << std::endl;
