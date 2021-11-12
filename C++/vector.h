@@ -37,7 +37,7 @@ float dotProductSimple(f_vector v1, f_vector v2){
 float norm(f_vector v){
 	float sum = 0;
 	for(size_t i = 0; i < v.dimensions; i++){
-		sum += v.e[i] * v.e[i]; 
+		sum += v.e[i] * v.e[i];
 	}
 	return sqrt(sum);
 }
@@ -47,7 +47,12 @@ void normalize(f_vector v){
 	for(size_t i = 0; i < v.dimensions; i++){
 		v.e[i] /= n;
 	}
+}
 
+void scale(f_vector v, float scalar){
+	for(size_t i = 0; i < v.dimensions; i++){
+		v.e[i] *= scalar;
+	}
 }
 
 float angleBetweenNonNormalized(f_vector v1, f_vector v2){
@@ -56,11 +61,24 @@ float angleBetweenNonNormalized(f_vector v1, f_vector v2){
 	float dotV1V2 = dotProductSimple(v1,v2);
 	return acos(dotV1V2/(v1Norm * v2Norm));
 }
+
 float angleBetweenNormalized(f_vector v1, f_vector v2){
 	normalize(v1);
 	normalize(v2);
-	return acos(dotProductSimple(v1,v2));;
-
+	return acos(dotProductSimple(v1,v2));
 }
 
-#endif 
+float projection(f_vector v1, f_vector v2){
+	float dot = dotProductSimple(v1, v2);
+	float div = dotProductSimple(v1, v1);
+	float scalar = dot / div;
+	scale(v1, scalar);
+
+	// v1 now stores the projected vector of v2
+	float hor_mag_sq = dotProductSimple(v1,v1);
+	float hyp_mag_sq = dotProductSimple(v2,v2);
+
+	return acos(sqrt(hor_mag_sq/hyp_mag_sq));
+}
+
+#endif
