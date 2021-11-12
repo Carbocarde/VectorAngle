@@ -28,18 +28,18 @@ float testDimensionsFromTo(float (*angleCalculator)(f_vector, f_vector), size_t 
 			delete v1.e;
 			delete v2.e;
 		}
-		std::cout  << "," << i << "," << average << "," << average/iterations_per_dimensions << std::endl;
+		std::cout  << i << "," << average << "," << average/iterations_per_dimensions << std::endl;
 	}
 	return sum;
 }
 
 int main(void){
 	//Run the program with only default arguments
-	std::cout << "Running " << STRINGYFY(angleBetweenNonNomalized) << std::endl;
+	std::cout << "Running " << STRINGYFY(angleBetweenNonNomalized) << ",," << std::endl;
 	testDimensionsFromTo(angleBetweenNonNormalized, 100, 5);
-	std::cout << "Running " << STRINGYFY(angleBetweenNormalized) << std::endl;
+	std::cout << "Running " << STRINGYFY(angleBetweenNormalized) << ",," << std::endl;
 	testDimensionsFromTo(angleBetweenNormalized, 100, 5);
-	std::cout << "Running " << STRINGYFY(projection) << std::endl;
+	std::cout << "Running " << STRINGYFY(projection) << ",," << std::endl;
 	testDimensionsFromTo(projection, 100, 5);
 	//Add more Test here
 
