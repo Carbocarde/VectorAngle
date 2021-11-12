@@ -38,9 +38,9 @@ def dot_product_mag(v1: np.array, v2: np.array) -> float:
     :return: The angle formed by the two vectors
     """
     dot = np.dot(v1, v2)
-    v1_mag = np.sqrt(np.dot(v1, v1))
-    v2_mag = np.sqrt(np.dot(v2, v2))
-    rad = np.arccos(dot / (v1_mag * v2_mag))
+    v1_mag = np.dot(v1, v1)
+    v2_mag = np.dot(v2, v2)
+    rad = np.arccos(dot / np.sqrt(v1_mag * v2_mag))
     return np.rad2deg(rad)
 
 
