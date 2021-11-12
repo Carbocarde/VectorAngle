@@ -38,7 +38,7 @@ float testDimensionsFromTo(float (*angleCalculator)(f_vector, f_vector), size_t 
 int main(void){
 	//Run the program with only default arguments
 	std::cout << "Running " << STRINGYFY(angleBetweenNonNomalized) << std::endl;
-	testDimensionsFromTo(angleBetweenNonNormalized);
+	testDimensionsFromTo(angleBetweenNonNormalized, 100, 5);
 	std::cout << "Running " << STRINGYFY(angleBetweenNormalized) << std::endl;
 	testDimensionsFromTo(angleBetweenNormalized, 100, 5);
 	//Add more Test here
