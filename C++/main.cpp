@@ -29,8 +29,7 @@ float testDimensionsFromTo(float (*angleCalculator)(f_vector, f_vector), size_t 
 			delete v1.e;
 			delete v2.e;
 		}
-		////average /= iterations;
-		std::cout  << ";" << i << "," << average << "," << average/iterations_per_dimensions << std::endl;
+		std::cout  << "," << i << "," << average << "," << average/iterations_per_dimensions << std::endl;
 	}
 	return sum;
 }
