@@ -22,6 +22,8 @@ int main(){
 			auto t2 = high_resolution_clock::now();
 			duration<double, std::milli> dur = t2 - t1;
 			average += dur.count();
+			delete v1.e;
+			delete v2.e;
 		}
 		////average /= iterations;
 		std::cout << i << "," << average << "," << average/iterations << std::endl;
