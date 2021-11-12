@@ -3,41 +3,48 @@
 #include <chrono>
 #include <stdlib.h>
 
+
+#define STRINGYFY(x) #x
+
 using std::chrono::high_resolution_clock;
 using std::chrono::duration_cast;
 using std::chrono::duration;
 using std::chrono::milliseconds;
 
-int main(){
+float testDimensionsFromTo(float (*angleCalculator)(f_vector, f_vector), size_t end = 100, size_t step = 10, size_t iterations_per_dimensions = 200000){
 	srand(time(NULL));		
-	constexpr size_t iterations = 200000;
-	auto t0 = high_resolution_clock::now();
-	std::cout <<  "Dimensions, Total Time, Average Time" << std::endl;
-	for(size_t i = 2; i <200; i += 2){
+	size_t start = 2;
+	float sum = 0;
+	for(size_t i = start; i < end; i += step){
 		double average = 0;
-		float* last1 = nullptr;
-		float* last2 = nullptr;
-		for(size_t j = 0; j < iterations; j++){ 
-			f_vector v1 = generateRandomVector(i); // 1/4 kB
-			f_vector v2 = generateRandomVector(i); // 1/4 kB
-			std::cout << v1.e - last1 <<""," << v2.e - last2 << std::endl;
+		for(size_t j = 0; j < iterations_per_dimensions; j++){ 
+			f_vector v1 = generateRandomVector(i); 
+			f_vector v2 = generateRandomVector(i); 
 			auto t1 = high_resolution_clock::now(); // I expect this to be a non factor
-			float angle = angleBetween(v1,v2);
-			__asm__ __volatile__ ("" : : : "memory"); // Evil Vodoo magic
+			sum += angleCalculator(v1,v2);
+			__asm__ __volatile__ ("" : : : "memory"); // This should prevent the optimizer from optimizing
 			auto t2 = high_resolution_clock::now();
 			duration<double, std::milli> dur = t2 - t1;
 			average += dur.count();
-			last1 = v1.e;
-			last2 = v2.e;
 			delete v1.e;
 			delete v2.e;
 		}
 		////average /= iterations;
-		//std::cout << i << "," << average << "," << average/iterations << std::endl;
+		std::cout  << ";" << i << "," << average << "," << average/iterations_per_dimensions << std::endl;
 	}
+	return sum;
+}
 
-	duration<double, std::milli> total = high_resolution_clock::now() - t0;
-	std::cout << "Total time: " << total.count() << std::endl;
+int main(void){
+	//Run the program with only default arguments
+	std::cout << "Running " << STRINGYFY(angleBetweenNonNomalized) << std::endl;
+	testDimensionsFromTo(angleBetweenNonNormalized);
+	std::cout << "Running " << STRINGYFY(angleBetweenNormalized) << std::endl;
+	testDimensionsFromTo(angleBetweenNormalized, 100, 5);
+	//Add more Test here
+	
+	
 
-
+	//
+	return 0;
 }
