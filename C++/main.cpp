@@ -11,7 +11,13 @@ using std::chrono::duration_cast;
 using std::chrono::duration;
 using std::chrono::milliseconds;
 
-float testDimensionsFromTo(float (*angleCalculator)(f_vector, f_vector), size_t end = 100, size_t step = 10, size_t iterations_per_dimensions = 200000){
+float testDimensionsFromTo(
+		float (*angleCalculator)(f_vector, f_vector)
+		, size_t end = 100
+		, size_t step = 10
+		, size_t iterations_per_dimensions = 200000
+	)
+{
 	srand(time(NULL));		
 	size_t start = 2;
 	float sum = 0;
@@ -33,17 +39,52 @@ float testDimensionsFromTo(float (*angleCalculator)(f_vector, f_vector), size_t 
 	}
 	return sum;
 }
+float
+testDimensionsFromToPreGeneratedVectors(
+		float (*angleCalculator)(f_vector, f_vector)
+		, size_t end = 100
+		, size_t step = 10
+		, size_t iterations_per_dimensions = 200000
+	)
+{
+	srand(NULL);
+	size_t start = 2;
+	float sum = 0;
+	for(int i = start; i < end; i+= step)
+	{
+		//Generate vectors in a giant array
+		f_vector * arrayOfVectors = (f_vector *)malloc(sizeof(f_vector) * iterations_per_dimensions * 2);
+		for(int j = 0; j < iterations_per_dimensions; j += 2)
+		{
+			generateRandomVector(&arrayOfVectors[j], i);
+			generateRandomVector(&arrayOfVectors[j+1], i);
+		}
+		// Calculate all vectors
+		auto t1 = high_resolution_clock::now();
+		for(int j = 0; j < iterations_per_dimensions; j += 2)
+		{
+			sum += angleCalculator(arrayOfVectors[j], arrayOfVectors[j + 1]);
+			__asm__ __volatile__ ("" : : : "memory"); // This should prevent the optimizer from optimizing
+		}
+		duration<double, std::milli> dur = high_resolution_clock::now() - t1;
+		free(arrayOfVectors);
+		std::cout 
+			<< "," << i 
+			<< "," << dur.count() 
+			<< "," << dur.count()/iterations_per_dimensions << std::endl;
+	}
+	return(sum);
+}
+
+#define RUN_TEST(function, parameters)					\
+	std::cout << "Running " << STRINGYFY(function) << std::endl; 	\
+	function parameters;
+
 
 int main(void){
-	//Run the program with only default arguments
-	std::cout << "Running " << STRINGYFY(angleBetweenNonNomalized) << std::endl;
-	testDimensionsFromTo(angleBetweenNonNormalized, 100, 5);
-	std::cout << "Running " << STRINGYFY(angleBetweenNormalized) << std::endl;
-	testDimensionsFromTo(angleBetweenNormalized, 100, 5);
-	//Add more Test here
-	
-	
+	RUN_TEST(testDimensionsFromTo, (angleBetweenNonNormalized,100,5,200000))
+	RUN_TEST(testDimensionsFromToPreGeneratedVectors, (angleBetweenNonNormalized, 100, 5, 200000))
 
-	//
+
 	return 0;
 }
