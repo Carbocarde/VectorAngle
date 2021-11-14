@@ -11,6 +11,13 @@ using std::chrono::duration_cast;
 using std::chrono::duration;
 using std::chrono::milliseconds;
 
+
+void static escape(void *p) // Mr. Carruth is asking you to use this function only for good ;D
+{
+	asm volatile("" : : "g"(p): "memory");
+}
+
+
 float testDimensionsFromTo(
 		float (*angleCalculator)(f_vector, f_vector)
 		, size_t end = 100
@@ -27,8 +34,8 @@ float testDimensionsFromTo(
 			f_vector v1 = generateRandomVector(i); 
 			f_vector v2 = generateRandomVector(i); 
 			auto t1 = high_resolution_clock::now(); // I expect this to be a non factor
-			sum += angleCalculator(v1,v2);
-			__asm__ __volatile__ ("" : : : "memory"); // This should prevent the optimizer from optimizing
+			float f = angleCalculator(v1,v2);
+			escape(&f);
 			auto t2 = high_resolution_clock::now();
 			duration<double, std::milli> dur = t2 - t1;
 			average += dur.count();
@@ -63,8 +70,8 @@ testDimensionsFromToPreGeneratedVectors(
 		auto t1 = high_resolution_clock::now();
 		for(int j = 0; j < iterations_per_dimensions; j += 2)
 		{
-			sum += angleCalculator(arrayOfVectors[j], arrayOfVectors[j + 1]);
-			__asm__ __volatile__ ("" : : : "memory"); // This should prevent the optimizer from optimizing
+			float f = angleCalculator(arrayOfVectors[j], arrayOfVectors[j + 1]);
+			escape(&f);
 		}
 		duration<double, std::milli> dur = high_resolution_clock::now() - t1;
 		free(arrayOfVectors);
