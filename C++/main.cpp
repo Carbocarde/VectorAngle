@@ -12,13 +12,21 @@ using std::chrono::duration;
 using std::chrono::milliseconds;
 
 
-void static escape(void *p) // Mr. Carruth is asking you to use this function only for good ;D
+void static 
+escape(void *p) // Mr. Carruth is asking you to use this function only for good ;D
 {
 	asm volatile("" : : "g"(p): "memory");
 }
 
+void static 
+clobber()
+{
+	asm volatile("" : : : "memory");
+}
 
-float testDimensionsFromTo(
+
+void
+testDimensionsFromTo(
 		float (*angleCalculator)(f_vector, f_vector)
 		, size_t end = 100
 		, size_t step = 10
@@ -27,7 +35,6 @@ float testDimensionsFromTo(
 {
 	srand(time(NULL));		
 	size_t start = 2;
-	float sum = 0;
 	for(size_t i = start; i < end; i += step){
 		double average = 0;
 		for(size_t j = 0; j < iterations_per_dimensions; j++){ 
@@ -44,9 +51,9 @@ float testDimensionsFromTo(
 		}
 		std::cout  << "," << i << "," << average << "," << average/iterations_per_dimensions << std::endl;
 	}
-	return sum;
 }
-float
+
+void
 testDimensionsFromToPreGeneratedVectors(
 		float (*angleCalculator)(f_vector, f_vector)
 		, size_t end = 100
@@ -56,7 +63,6 @@ testDimensionsFromToPreGeneratedVectors(
 {
 	srand(NULL);
 	size_t start = 2;
-	float sum = 0;
 	for(int i = start; i < end; i+= step)
 	{
 		//Generate vectors in a giant array
@@ -70,8 +76,11 @@ testDimensionsFromToPreGeneratedVectors(
 		auto t1 = high_resolution_clock::now();
 		for(int j = 0; j < iterations_per_dimensions; j += 2)
 		{
-			float f = angleCalculator(arrayOfVectors[j], arrayOfVectors[j + 1]);
+			float f = 0;
 			escape(&f);
+			f = angleCalculator(arrayOfVectors[j], arrayOfVectors[j + 1]);
+			clobber();
+
 		}
 		duration<double, std::milli> dur = high_resolution_clock::now() - t1;
 		free(arrayOfVectors);
@@ -80,9 +89,10 @@ testDimensionsFromToPreGeneratedVectors(
 			<< "," << dur.count() 
 			<< "," << dur.count()/iterations_per_dimensions << std::endl;
 	}
-	return(sum);
 }
 
+
+// This is a macro for easier benchmarking
 #define RUN_TEST(function, parameters)					\
 	std::cout << "Running " << STRINGYFY(function) << std::endl; 	\
 	function parameters;
