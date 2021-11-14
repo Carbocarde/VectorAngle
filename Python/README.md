@@ -1,6 +1,4 @@
-## About This Project
-Dot products encode a lot of information - one of which is the angle between two vectors.
-This project aims to discover/document the different ways to calculate the angle between two vectors.
+## Python Implementation
 
 ## Current Methods
 1. Dot Product (norm)
@@ -9,7 +7,7 @@ This project aims to discover/document the different ways to calculate the angle
 4. Dot Product Bin Search (mag)
 5. Projection Bin Search
 
-## Current Numbers
+## Current Numbers - Python Benchmark
 Runtime for each method to calculate the angle between 1,000,000 randomly generated vectors on an Intel® Core™ i7-8550U CPU
 (in seconds).
 
@@ -38,11 +36,8 @@ Vector Dimension|Dot Product - Norm|Dot Product - Mag|Projection|Dot Product - B
 - [X] Numba Integration
   - [X] Methods
   - [X] Util
-- [X] Projection Method Writeup
 - [X] Dot Product Binary Search Implementation
 - [X] Projection Binary Search Implementation
-- [X] Publish Repo
-- [X] Rewrite in C++
 - [ ] Change of Basis Implementation
 
 ## File Structure
@@ -56,7 +51,6 @@ Vector Dimension|Dot Product - Norm|Dot Product - Mag|Projection|Dot Product - B
  - TestAngleBenchmark
     - Contains testcases that execute the methods a specified number of times on randomly generated vectors.
     - The testcases will take a while to start executing, as all the vectors are generated prior to any testcase being executed.
-    - I use Pycharm, as this allows me to collect and export the runtime for each of the pytest testcases.
  - Util.py
     - Contains utility functions like generating vectors or normalizing a vector.
 
