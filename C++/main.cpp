@@ -59,7 +59,7 @@ void testDimensionsFromToPreGeneratedVectors(
 		, size_t iterations_per_dimensions = 200000
 	)
 {
-	srand(NULL);
+	srand(time(NULL));
 	size_t start = 2;
 	for(int i = start; i < end; i+= step)
 	{
