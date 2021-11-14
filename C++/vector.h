@@ -25,8 +25,7 @@ f_vector generateRandomVector(size_t dim){
 	return v;
 }
 
-void
-generateRandomVector(f_vector * v, size_t dim){
+void generateRandomVector(f_vector * v, size_t dim){
 	v->e = new float[dim];
 	v->dimensions = dim;
 	for(size_t i = 0; i < dim; i++){
@@ -80,7 +79,7 @@ float angleBetweenNormalized(f_vector v1, f_vector v2){
 	return acos(dotProductSimple(v1,v2));
 }
 
-float projection(f_vector v1, f_vector v2){
+float angleBetweenProjection(f_vector v1, f_vector v2){
 	float dot = dotProductSimple(v1, v2);
 	float div = dotProductSimple(v1, v1);
 	float scalar = dot / div;

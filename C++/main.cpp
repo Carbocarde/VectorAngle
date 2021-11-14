@@ -94,8 +94,9 @@ void testDimensionsFromToPreGeneratedVectors(
 	function parameters;
 
 int main(void){
-	RUN_TEST(testDimensionsFromTo, (angleBetweenNonNormalized,100,5,200000))
 	RUN_TEST(testDimensionsFromToPreGeneratedVectors, (angleBetweenNonNormalized, 100, 5, 200000))
+	RUN_TEST(testDimensionsFromToPreGeneratedVectors, (angleBetweenNormalized, 100, 5, 200000))
+	RUN_TEST(testDimensionsFromToPreGeneratedVectors, (angleBetweenProjection, 100, 5, 200000))
 
 	return 0;
 }
