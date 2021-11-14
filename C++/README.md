@@ -31,6 +31,10 @@ The function `testDimensionsFromTo` takes in
 
 ## How do I add a new function to test to the program
 
-copy and past the two lines beginning with "std::cout" and "testDimensions" and replace the the function (the first argument in the called function) and the string in "STRINGYFY(x)".
-
-Save ... Compile ... Execute
+In the main function:
+type the macro `RUN_TEST(X,Y)`, where:
+	X is the methodology to test with
+		- `testDimensionsFromTo`
+		- `testDimensionsFromToPreGeneratedVectors`
+	Y is the arguments for the function X in the format `(functionToTest, maximumDimensions, step Size between dimensions, iterations per dimension)`
+		The braces are `()` are important as the argument Y gets concatonated as is onto the functioncall X

@@ -25,6 +25,18 @@ f_vector generateRandomVector(size_t dim){
 	return v;
 }
 
+void
+generateRandomVector(f_vector * v, size_t dim){
+	v->e = new float[dim];
+	v->dimensions = dim;
+	for(size_t i = 0; i < dim; i++){
+		int j = rand();
+		v->e[i] = *(float *)&j;
+
+	}
+
+};
+
 // takes in two vectors and gives back their dot product
 float dotProductSimple(f_vector v1, f_vector v2){
 	float sum = 0;
