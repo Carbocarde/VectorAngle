@@ -3,14 +3,12 @@
 #include <chrono>
 #include <stdlib.h>
 
-
 #define STRINGYFY(x) #x
 
 using std::chrono::high_resolution_clock;
 using std::chrono::duration_cast;
 using std::chrono::duration;
 using std::chrono::milliseconds;
-
 
 void static 
 escape(void *p) // Mr. Carruth is asking you to use this function only for good ;D
@@ -33,13 +31,13 @@ testDimensionsFromTo(
 		, size_t iterations_per_dimensions = 200000
 	)
 {
-	srand(time(NULL));		
+	srand(time(NULL));
 	size_t start = 2;
 	for(size_t i = start; i < end; i += step){
 		double average = 0;
-		for(size_t j = 0; j < iterations_per_dimensions; j++){ 
-			f_vector v1 = generateRandomVector(i); 
-			f_vector v2 = generateRandomVector(i); 
+		for(size_t j = 0; j < iterations_per_dimensions; j++){
+			f_vector v1 = generateRandomVector(i);
+			f_vector v2 = generateRandomVector(i);
 			auto t1 = high_resolution_clock::now(); // I expect this to be a non factor
 			float f = angleCalculator(v1,v2);
 			escape(&f);
@@ -49,7 +47,7 @@ testDimensionsFromTo(
 			delete v1.e;
 			delete v2.e;
 		}
-		std::cout  << "," << i << "," << average << "," << average/iterations_per_dimensions << std::endl;
+		std::cout  << i << "," << average << "," << average/iterations_per_dimensions << std::endl;
 	}
 }
 
@@ -101,7 +99,6 @@ testDimensionsFromToPreGeneratedVectors(
 int main(void){
 	RUN_TEST(testDimensionsFromTo, (angleBetweenNonNormalized,100,5,200000))
 	RUN_TEST(testDimensionsFromToPreGeneratedVectors, (angleBetweenNonNormalized, 100, 5, 200000))
-
 
 	return 0;
 }

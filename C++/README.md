@@ -12,6 +12,10 @@
 # Plotting the output
 The program outputs all the results from the tests in a CSV File, where the first column is always only the name of the function that was called.
 
+# Current Numbers
+See timings.csv for the raw data. Ran on an Intel® Core™ i7-8550U CPU.
+![timings plot](timingsplot.svg)
+
 
 # What does the program do?
 
@@ -34,5 +38,3 @@ type the macro `RUN_TEST(X,Y)`, where:
 		- `testDimensionsFromToPreGeneratedVectors`
 	Y is the arguments for the function X in the format `(functionToTest, maximumDimensions, step Size between dimensions, iterations per dimension)`
 		The braces are `()` are important as the argument Y gets concatonated as is onto the functioncall X
-
-
