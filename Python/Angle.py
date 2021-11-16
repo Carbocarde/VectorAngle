@@ -82,6 +82,53 @@ def projection(v1: np.array, v2: np.array) -> float:
     return deg
 
 
+def change_of_basis(v1: np.array, v2: np.array) -> float:
+    """
+    The intuition behind this is to find a linear transform that transforms v1 and v2 into a new basis space where v1
+    is a basis vector.
+
+    This is Passive Transformation.
+    https://en.wikipedia.org/wiki/Active_and_passive_transformation
+
+    :param v1: Vector 1
+    :param v2: Vector 2
+    :return: The angle formed by the two vectors
+    """
+    angle = 0
+
+    return angle
+
+
+def rotation(v1: np.array, v2: np.array) -> float:
+    """
+    The intuition behind this is to find a linear transform that rotates v1 into a single component (along an existing basis vector).
+
+    This is Active Transformation.
+    https://en.wikipedia.org/wiki/Active_and_passive_transformation
+
+    :param v1: Vector 1
+    :param v2: Vector 2
+    :return: The angle formed by the two vectors
+    """
+    angle = 0
+
+    return angle
+
+
+def component_angles(v1: np.array, v2: np.array) -> float:
+    """
+    The intuition behind this is to calculate the angles of each of the components of the vector relative to the basis vectors.
+    Then use those individual measurements to find the angle between both vectors.
+
+    :param v1: Vector 1
+    :param v2: Vector 2
+    :return: The angle formed by the two vectors
+    """
+    angle = 0
+
+    return angle
+
+
 @njit
 def dot_bin_search(v1: np.array, v2: np.array, accuracy=0.000001) -> float:
     """

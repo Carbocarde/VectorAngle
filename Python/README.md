@@ -25,9 +25,6 @@ Vector Dimension|Dot Product - Norm|Dot Product - Mag|Projection|Dot Product - B
 100|1.992|0.757|1.420|1:27|1:43
 1,000|1.283|0.560|0.826|5:02|8:45
 
-## Future Methods
-1. Change of Basis
-
 ## TODO
 - [X] Dot Product Norm Implementation
 - [X] Projection Implementation
@@ -39,6 +36,8 @@ Vector Dimension|Dot Product - Norm|Dot Product - Mag|Projection|Dot Product - B
 - [X] Dot Product Binary Search Implementation
 - [X] Projection Binary Search Implementation
 - [ ] Change of Basis Implementation
+- [ ] Rotation Implementation
+- [ ] Component Angles Implementation
 
 ## File Structure
  - Angle.py
