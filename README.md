@@ -1,4 +1,4 @@
-## About This Project
+/## About This Project
 Dot products encode a lot of information - one of which is the angle between two vectors.
 This project aims to discover/document the different ways to calculate the angle between two vectors.
 
@@ -15,7 +15,7 @@ The dot product can appear to be mysterious, after all, what does multiplying th
 5. Projection Bin Search
 
 ## Future Methods
-Check out [Angle.py](Python\Angle.py) and read the method docstrings!
+Check out [Angle.py](Python/Angle.py) and read the method docstrings!
 1. Change of Basis
 2. Rotate Vectors
 3. Component Angles
